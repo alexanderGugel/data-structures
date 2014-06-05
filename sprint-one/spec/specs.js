@@ -19,6 +19,7 @@ define([
   describe("stack", function() {
 
     var stack;
+    var stacks = [];
     var instantiator = variant === 'pseudoclassical' ? Stack : makeStack;
     var prototypeOfInstances = variant === 'prototypal' && stackMethods;
 
@@ -28,6 +29,41 @@ define([
       } else {
         stack = instantiator();
       }
+    });
+
+
+
+    describe('profiling test case', function() {
+      it('10000 instantiations tests', function() {
+        var stack;
+        if (variant === 'pseudoclassical') {
+          for (var i = 0; i < 10000000; i++) {
+            stack = new instantiator();
+            stacks.push(stack);
+          }
+        } else {
+          for (var i = 0; i < 100000; i++) {
+            stack = instantiator();
+            stacks.push(stack);
+          }
+        }
+      });
+
+      // it('10000 pushes to 10000 objects tests', function() {
+      //   for (var i = 0, l = stacks.length; i < l; i += 1) {
+      //     for (var j = 0, m = 10000; j < m; j += 1) {
+      //       stacks[i].push(i);
+      //     }
+      //   }
+      // });
+
+      // it('10000 pops to 10000 objects tests', function() {
+      //   for (var i = 0, l = stacks.length; i < l; i += 1) {
+      //     for (var j = 0, m = 10000; j < m; j += 1) {
+      //       stacks[i].pop();
+      //     }
+      //   }
+      // });
     });
 
     describe('stack shared behavior', function(){
