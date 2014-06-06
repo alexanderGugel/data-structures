@@ -1,20 +1,29 @@
 var makeSet = function(){
   var set = Object.create(setPrototype);
-  set._storage = undefined;
+  set._storage = {};
   return set;
 };
 
 var setPrototype = {};
 
 setPrototype.add = function(item){
+  this._storage[item] = true;
 };
 
 setPrototype.contains = function(item){
+  return !!this._storage[item];
+  // if (this._storage[item]) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 };
 
 setPrototype.remove = function(item){
+  delete this._storage[item];
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * O(1) (everything)
  */
