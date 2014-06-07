@@ -10,24 +10,22 @@ var makeLinkedList = function(){
       list.head = linkedListNode;
       list.tail = linkedListNode;
     } else {
-      var previousTail = list.tail;
+      list.tail.next = linkedListNode;
       list.tail = linkedListNode;
-      previousTail.next = linkedListNode;
     }
   };
 
   list.removeHead = function(){
-    if (list.head !== null) {
+    if (list.head) {
       // List not empty
       var previousHeadVal = list.head.value;
       if (list.head.next === null) {
-        // Only one element inside the list
-        list.head = null;
-      } else {
-        list.head = list.head.next;
+        list.tail = null;
       }
+      list.head = list.head.next;
       return previousHeadVal;
     }
+
   };
 
   list.contains = function(target){
