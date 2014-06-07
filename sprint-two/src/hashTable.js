@@ -23,11 +23,9 @@ HashTable.prototype.insert = function(k, v){
   }
 
   this._size++;
-  console.log('size,limit', this._size, this._limit)
   bucket.push([k, v]);
 
   this._storage.set(index, bucket);
-  console.log('stuff', this._size, this._limit * this._doubleWhen);
   if (this._size >= (this._limit * this._doubleWhen)) {
     this._resize(2);
   }
@@ -74,10 +72,7 @@ HashTable.prototype.remove = function(k){
       if (bucket[i][0] === k) {
         this._size--;
         bucket.splice(i, 1);
-  console.log('size,limit', this._size, this._limit)
-
         if (this._size < (this._limit * this._halveWhen)) {
-          console.log('needstohalve')
           this._resize(1/2);
         }
       }
