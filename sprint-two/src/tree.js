@@ -8,9 +8,6 @@ var makeTree = function(value){
   return newTree;
 };
 
-
-
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
@@ -19,27 +16,13 @@ treeMethods.addChild = function(value){
 };
 
 treeMethods.contains = function(target){
-
-  var result = false;
-
   if (this.value === target) {
-    result = true;
+    return true;
   } else {
-    for (var i = 0; i < this.children.length; i += 1) {
-      if (this.children[i].contains(target) === true) {
-        result = true;
-      }
-    }
-    // var found= false;
-    // _.each(this.children, function (child) {
-    //   if (child.contains(target)) {
-    //     found = true;
-    //   }
-    // });
-    // return found;
+    return _.some(this.children, function(child) {
+      return child.contains(target);
+    });
   }
-
-  return result;
 };
 
 
