@@ -40,7 +40,6 @@ HashTable.prototype._resize = function(factor) {
   old.each(function (bucket) {
     if (bucket) {
       for (var i = 0; i < bucket.length; i++) {
-        // var newIndex = getIndexBelowMaxForKey(bucket[i][0], this._limit);
         this.insert(bucket[i][0], bucket[i][1]);
       }
     }
@@ -65,8 +64,6 @@ HashTable.prototype.retrieve = function(k){
 HashTable.prototype.remove = function(k){
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index);
-  // debugger;
-
   if (bucket) {
     for (var i = 0; i < bucket.length; i += 1) {
       if (bucket[i][0] === k) {
@@ -84,4 +81,5 @@ HashTable.prototype.remove = function(k){
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * O(1) (ignoring re-hashing)
  */
