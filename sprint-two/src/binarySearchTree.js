@@ -14,6 +14,14 @@ var delegateInsert = function (next, value) {
   }
 };
 
+var delegateContains = function (next, value) {
+  if (this[next] === null) {
+    return false;
+  } else {
+    return this[next].contains(value);
+  }
+};
+
 var binarySearchTreeMethods = {
   insert: function (value) {
     if (value < this.value) {
@@ -28,18 +36,10 @@ var binarySearchTreeMethods = {
       return true;
     }
     if (value < this.value) {
-      if (this.left === null) {
-        return false;
-      } else {
-        return this.left.contains(value);
-      }
+      return delegateContains.call(this, 'left', value);
     }
     if (value > this.value) {
-      if (this.right === null) {
-        return false;
-      } else {
-        return this.right.contains(value);
-      }
+      return delegateContains.call(this, 'right', value);
     }
   },
   depthFirstLog: function (cb) {
