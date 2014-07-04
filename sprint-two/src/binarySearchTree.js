@@ -6,21 +6,21 @@ var makeBinarySearchTree = function(value){
   return bst;
 };
 
+var delegateInsert = function (next, value) {
+  if (this[next] === null) {
+    this[next] = makeBinarySearchTree(value);
+  } else {
+    this[next].insert(value);
+  }
+};
+
 var binarySearchTreeMethods = {
   insert: function (value) {
     if (value < this.value) {
-      if (this.left === null) {
-        this.left = makeBinarySearchTree(value);
-      } else {
-        this.left.insert(value);
-      }
+      delegateInsert.call(this, 'left', value);
     }
     if (value > this.value) {
-      if (this.right === null) {
-        this.right = makeBinarySearchTree(value);
-      } else {
-        this.right.insert(value);
-      }
+      delegateInsert.call(this, 'right', value);
     }
   },
   contains: function (value) {
@@ -43,7 +43,7 @@ var binarySearchTreeMethods = {
     }
   },
   depthFirstLog: function (cb) {
-    cb(this.value)
+    cb(this.value);
     if (this.left !== null) {
       this.left.depthFirstLog(cb);
     }
