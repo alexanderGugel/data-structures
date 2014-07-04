@@ -5,8 +5,6 @@ var makeQueue = function(){
   var storage = {};
   var length = 0;
 
-  // Implement the methods below
-
   someInstance.enqueue = function(value){
     storage[length] = value;
     length += 1;
